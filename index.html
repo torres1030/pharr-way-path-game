@@ -137,7 +137,7 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
       Or update the src attribute below to match your filename.
       ═══════════════════════════════════════════════
     -->
-    <img class="board-img" src="Pharr Way Board Game Map.png" alt="The PHARR Way game board">
+    <img class="board-img" src="Pharr Way Board Game Map.png" alt="The Pharr Way Board Game Map">
   </div>
 
   <div class="teams-row" id="teamsRow"></div>
@@ -291,7 +291,7 @@ function buildPicker(p) {
     const picked  = sel[p] === c.id;
     const d = document.createElement('div');
     d.className = 'char-opt' + (picked ? ' selected' : '') + (takenBy ? ' taken' : '');
-    d.innerHTML = `<img src="${c.img}" alt="${c.name}"><div class="cn">${c.name}</div><div class="ck">✓</div>`;
+    d.innerHTML = `<img "${c.img}" alt="${c.name}"><div class="cn">${c.name}</div><div class="ck">✓</div>`;
     d.onclick = () => pickChar(p, c.id);
     cg.appendChild(d);
   });
@@ -336,7 +336,7 @@ function buildTokens() {
     const d = document.createElement('div');
     d.className = 'token';
     d.id = 'tok' + i;
-    d.innerHTML = `<img src="${active[i].img}" style="width:${sz}px;height:${sz}px;" alt="${active[i].name}">`;
+    d.innerHTML = `<img "${active[i].img}" style="width:${sz}px;height:${sz}px;" alt="${active[i].name}">`;
     wrap.appendChild(d);
   });
   setTimeout(() => active.forEach((_, i) => placeToken(i)), 120);
@@ -374,7 +374,7 @@ function buildCards() {
     c.id = 'card' + i;
     c.innerHTML = `
       <div class="tthumb">
-        <img src="${p.img}" alt="${p.name}">
+        <img "${p.img}" alt="${p.name}">
         <div>
           <div class="tname">${p.name}</div>
           <div class="tpos" id="pos${i}">Square 0 / ${TOTAL}</div>
@@ -420,7 +420,7 @@ function mark(i, correct) {
 function showWin(ws) {
   const b = document.getElementById('winBanner');
   document.getElementById('winChars').innerHTML = ws.map(i =>
-    `<img src="${active[i].img}" alt="${active[i].name}">`
+    `<img "${active[i].img}" alt="${active[i].name}">`
   ).join('');
   document.getElementById('winTxt').textContent =
     `🎉 ${ws.map(i => active[i].name).join(' & ')} reached the finish line! Congratulations!`;
