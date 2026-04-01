@@ -292,7 +292,7 @@ function buildPicker(p) {
     const picked  = sel[p] === c.id;
     const d = document.createElement('div');
     d.className = 'char-opt' + (picked ? ' selected' : '') + (takenBy ? ' taken' : '');
-    d.innerHTML = `<img "${c.img}" alt="${c.name}"><div class="cn">${c.name}</div><div class="ck">✓</div>`;
+    d.innerHTML = `<img src="${c.img}" alt="${c.name}"><div class="cn">${c.name}</div><div class="ck">✓</div>`;
     d.onclick = () => pickChar(p, c.id);
     cg.appendChild(d);
   });
