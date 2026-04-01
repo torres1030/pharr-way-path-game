@@ -1,2 +1,2 @@
 # pharr-way-path-game
-Interactive Board Game based on the Pharr Way Journey
+Interactive Board Game Based on the Pharr Way Journey
