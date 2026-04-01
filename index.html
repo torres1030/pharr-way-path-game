@@ -75,7 +75,7 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 </style>
 </head>
 <body>
- 
+
 <div class="screen active" id="sSetup">
   <h1 style="color:#fff;font-size:28px;text-shadow:0 2px 8px rgba(0,0,0,.5);">
     🏙️ The PHARR Way Path Game
@@ -96,7 +96,7 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
   </div>
   <button class="btn-start" id="btnStart" disabled onclick="startGame()">Start Game →</button>
 </div>
- 
+
 <div class="screen" id="sGame">
   <h1 style="color:#fff;font-size:22px;">🏙️ The PHARR Way Path Game</h1>
   <div class="board-wrap" id="boardWrap">
@@ -123,10 +123,10 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
     <button class="btn-next" style="margin-top:14px;" onclick="goSetup()">Play Again</button>
   </div>
 </div>
- 
+
 <script>
 const BASE = 'https://torres1030.github.io/pharr-way-path-game/';
- 
+
 const CHARS = [
   { id:'sparky', name:'Sparky', role:'Fire Dept.',        img: BASE + 'Sparky%20Dog.png'       },
   { id:'ash',    name:'Ash',    role:'Fire Dept.',        img: BASE + 'Sparky%20Recolor.png'   },
@@ -137,14 +137,14 @@ const CHARS = [
   { id:'ozzy',   name:'Ozzy',   role:'OSE',               img: BASE + 'Ozzy%20OSE%20Ocelot.png'},
   { id:'track',  name:'Track',  role:'OSE',               img: BASE + 'Ozzy%20Recolor.png'     },
 ];
- 
+
 const WAYPOINTS = [
   [51,95],[30,83],[16,68],[16,48],[20,28],[36,17],
   [51,22],[66,13],[83,18],[88,35],[86,54],[83,72],
 ];
 const TOTAL = WAYPOINTS.length - 1;
 const OFFSETS = [[-26,-2],[26,-2],[-10,-20],[10,-20],[-28,-18],[28,-18],[0,-30],[0,-8]];
- 
+
 const Qs = [
   { q:"What are the Three P's?",                                          a:"People, Process, and Performance" },
   { q:"How do we improve our processes?",                                 a:"STEP" },
@@ -159,15 +159,15 @@ const Qs = [
   { q:"In one word, what does 'Team Pharr' represent in the workplace?",  a:"Teamwork. Collaboration. Unity" },
   { q:"What is our commitment?",                                          a:"Excellence Every Day" },
 ];
- 
+
 let numP=2, sel={}, positions=[], answered=[], curQ=0, gameOver=false, active=[];
- 
+
 function chgCount(d){
   numP=Math.min(8,Math.max(2,numP+d));
   document.getElementById('cntVal').textContent=numP;
   sel={};buildGrid();checkStart();
 }
- 
+
 function buildGrid(){
   const g=document.getElementById('playersGrid');g.innerHTML='';
   for(let p=0;p<numP;p++){
@@ -176,7 +176,7 @@ function buildGrid(){
     g.appendChild(s);buildPicker(p);
   }
 }
- 
+
 function buildPicker(p){
   const cg=document.getElementById('cg'+p);cg.innerHTML='';
   CHARS.forEach(c=>{
@@ -189,14 +189,14 @@ function buildPicker(p){
     cg.appendChild(d);
   });
 }
- 
+
 function pickChar(p,id){ sel[p]===id?delete sel[p]:(sel[p]=id); for(let i=0;i<numP;i++)buildPicker(i); checkStart(); }
- 
+
 function checkStart(){
   const ok=Object.keys(sel).length===numP&&new Set(Object.values(sel)).size===numP;
   document.getElementById('btnStart').disabled=!ok;
 }
- 
+
 function startGame(){
   active=[];
   for(let p=0;p<numP;p++) active.push({...CHARS.find(c=>c.id===sel[p]),pNum:p+1});
@@ -208,9 +208,9 @@ function startGame(){
   document.getElementById('winBanner').style.display='none';
   buildTokens();buildCards();renderQ();
 }
- 
+
 function tokenSize(){ const bw=document.getElementById('boardWrap').offsetWidth; return Math.max(60,Math.min(100,Math.floor(bw/9))); }
- 
+
 function buildTokens(){
   const wrap=document.getElementById('boardWrap');
   wrap.querySelectorAll('.token').forEach(t=>t.remove());
@@ -230,7 +230,7 @@ function buildTokens(){
     });
   };
 }
- 
+
 function placeToken(i){
   const wrap=document.getElementById('boardWrap');
   const bw=wrap.offsetWidth;
@@ -241,7 +241,7 @@ function placeToken(i){
   t.style.left=(bw*wx/100+ox)+'px';
   t.style.top=(bh*wy/100+oy)+'px';
 }
- 
+
 function buildCards(){
   const row=document.getElementById('teamsRow');row.innerHTML='';
   active.forEach((p,i)=>{
@@ -258,7 +258,7 @@ function buildCards(){
     row.appendChild(c);
   });
 }
- 
+
 function mark(i,correct){
   if(answered[i]||gameOver)return;
   answered[i]=true;
@@ -279,14 +279,14 @@ function mark(i,correct){
   document.getElementById('pos'+i).textContent=fin?'🏆 Finished!':`Square ${positions[i]} / ${TOTAL}`;
   if(fin){card.classList.add('finished');if(!gameOver){gameOver=true;setTimeout(()=>showWin([i]),500);}}
 }
- 
+
 function showWin(ws){
   const b=document.getElementById('winBanner');
   document.getElementById('winChars').innerHTML=ws.map(i=>`<img src="${active[i].img}" alt="${active[i].name}">`).join('');
   document.getElementById('winTxt').textContent=`🎉 ${ws.map(i=>active[i].name).join(' & ')} reached the finish line! Congratulations!`;
   b.style.display='block';b.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
- 
+
 function renderQ(){
   if(curQ>=Qs.length){
     document.getElementById('qTxt').textContent='All questions used! Check the final standings.';
@@ -304,7 +304,7 @@ function renderQ(){
   answered=active.map((_,i)=>positions[i]>=TOTAL);
   active.forEach((_,i)=>{const f=positions[i]>=TOTAL;document.getElementById('bc'+i).disabled=f;document.getElementById('bw'+i).disabled=f;});
 }
- 
+
 function revealAns(){document.getElementById('qAns').style.display='block';}
 function nextQ(){if(!gameOver){curQ++;renderQ();}}
 function goSetup(){
@@ -312,7 +312,7 @@ function goSetup(){
   document.getElementById('sSetup').classList.add('active');
   sel={};buildGrid();checkStart();
 }
- 
+
 buildGrid();
 </script>
 </body>
