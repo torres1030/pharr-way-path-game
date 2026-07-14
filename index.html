@@ -15,6 +15,19 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 .count-btn{width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:20px;font-weight:bold;cursor:pointer;transition:all .15s;}
 .count-btn:hover{background:rgba(255,255,255,.22);border-color:#FFD700;}
 .count-val{font-size:26px;font-weight:bold;color:#FFD700;min-width:30px;text-align:center;}
+/* ── DIFFICULTY ── */
+.diff-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:600px){.diff-row{grid-template-columns:1fr 1fr;}}
+.diff-btn{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);
+  border-radius:14px;padding:14px 10px;cursor:pointer;color:#fff;
+  display:flex;flex-direction:column;align-items:center;gap:5px;transition:all .15s;font-family:Arial,sans-serif;}
+.diff-btn:hover{border-color:#FFD700;background:rgba(255,215,0,.08);}
+.diff-btn.active{border-color:#FFD700;background:rgba(255,215,0,.15);box-shadow:0 0 18px rgba(255,215,0,.2);}
+.diff-icon{font-size:26px;line-height:1;}
+.diff-name{font-size:15px;font-weight:bold;letter-spacing:.03em;}
+.diff-desc{font-size:11px;opacity:.55;text-align:center;line-height:1.3;}
+.diff-count{font-size:11px;color:#FFD700;font-weight:bold;margin-top:2px;}
+/* ── CHARACTERS ── */
 .players-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;width:100%;}
 .player-slot{background:rgba(255,255,255,.07);border-radius:14px;padding:14px;border:2px solid rgba(255,255,255,.12);}
 .player-slot h3{color:#fff;font-size:13px;margin-bottom:10px;opacity:.75;text-transform:uppercase;letter-spacing:.06em;}
@@ -27,9 +40,10 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 .char-opt .cn{font-size:8.5px;text-align:center;color:rgba(255,255,255,.85);padding:2px 2px 5px;line-height:1.2;}
 .char-opt .ck{display:none;position:absolute;top:3px;right:3px;background:#4CAF50;border-radius:50%;width:15px;height:15px;font-size:9px;color:#fff;align-items:center;justify-content:center;}
 .char-opt.selected .ck{display:flex;}
-.btn-start{padding:13px 40px;background:#E8A020;color:#1a1a1a;border:none;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer;transition:opacity .15s,transform .1s;}
+.btn-start{padding:13px 40px;background:#E8A020;color:#1a1a1a;border:none;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer;transition:opacity .15s;}
 .btn-start:hover{opacity:.88;}
 .btn-start:disabled{opacity:.3;cursor:not-allowed;}
+/* ── BOARD ── */
 .board-wrap{position:relative;width:100%;max-width:980px;}
 .board-img{width:100%;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.55);display:block;}
 .token{position:absolute;transition:left .65s cubic-bezier(.34,1.56,.64,1),top .65s cubic-bezier(.34,1.56,.64,1);transform:translate(-50%,-100%);pointer-events:none;}
@@ -38,6 +52,7 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 @keyframes bnc{0%{transform:translate(-50%,-100%) scale(1);}30%{transform:translate(-50%,-128%) scale(1.2);}65%{transform:translate(-50%,-94%) scale(.94);}100%{transform:translate(-50%,-100%) scale(1);}}
 .token.shake{animation:shk .42s ease;}
 @keyframes shk{0%,100%{transform:translate(-50%,-100%) rotate(0);}20%{transform:translate(-50%,-100%) rotate(-9deg);}40%{transform:translate(-50%,-100%) rotate(9deg);}60%{transform:translate(-50%,-100%) rotate(-5deg);}80%{transform:translate(-50%,-100%) rotate(5deg);}}
+/* ── TEAMS ── */
 .teams-row{display:flex;gap:8px;width:100%;max-width:980px;flex-wrap:wrap;}
 .team-card{flex:1;min-width:130px;background:rgba(255,255,255,.1);border-radius:12px;padding:10px 12px;border:2px solid transparent;transition:border-color .3s,background .3s;}
 .team-card.finished{border-color:#4CAF50;background:rgba(76,175,80,.2);}
@@ -53,6 +68,7 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 .bw{background:#e53935;color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:bold;cursor:pointer;}
 .bw:hover{opacity:.85;}
 .bc:disabled,.bw:disabled{opacity:.28;cursor:not-allowed;}
+/* ── QUESTION PANEL ── */
 .q-panel{width:100%;max-width:980px;background:#1B3A6B;border-radius:14px;padding:18px 22px;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.4);}
 .qlbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:3px;}
 .qmeta{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
@@ -74,34 +90,23 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 .btn-back:hover{background:rgba(255,255,255,.2);}
 .prog{height:5px;background:rgba(255,255,255,.12);border-radius:3px;margin-top:12px;}
 .progf{height:100%;background:#E8A020;border-radius:3px;transition:width .4s;}
+/* ── WIN ── */
 .win-banner{display:none;width:100%;max-width:980px;background:linear-gradient(135deg,#E8A020,#FFD700);border-radius:16px;padding:24px;text-align:center;}
 .win-banner h2{font-size:28px;color:#1B3A6B;}
 .win-banner p{font-size:15px;color:#1B3A6B;font-weight:500;margin-top:6px;}
 .win-chars{display:flex;justify-content:center;gap:8px;margin:12px 0;flex-wrap:wrap;}
 .win-chars img{width:90px;height:90px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));}
-
-.diff-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-@media(max-width:600px){.diff-row{grid-template-columns:1fr 1fr;}}
-.diff-btn{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);
-  border-radius:14px;padding:14px 10px;cursor:pointer;color:#fff;
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  transition:all .15s;font-family:Arial,sans-serif;}
-.diff-btn:hover{border-color:#FFD700;background:rgba(255,215,0,.08);}
-.diff-btn.active{border-color:#FFD700;background:rgba(255,215,0,.15);
-  box-shadow:0 0 18px rgba(255,215,0,.2);}
-.diff-icon{font-size:26px;line-height:1;}
-.diff-name{font-size:15px;font-weight:bold;letter-spacing:.03em;}
-.diff-desc{font-size:11px;opacity:.55;text-align:center;line-height:1.3;}
-.diff-count{font-size:11px;color:#FFD700;opacity:.8;font-weight:bold;margin-top:2px;}
-.diff-btn.active .diff-count{opacity:1;}
 </style>
 </head>
 <body>
 
+<!-- ══ SETUP SCREEN ══════════════════════════════════════════════════════════ -->
 <div class="screen active" id="sSetup">
   <h1 style="color:#fff;font-size:28px;text-shadow:0 2px 8px rgba(0,0,0,.5);">
     🏙️ The PHARR Way Path Game
   </h1>
+
+  <!-- Player count -->
   <div class="setup-card">
     <h2>How many players?</h2>
     <div class="count-row">
@@ -111,44 +116,50 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
       <span style="font-size:13px;opacity:.55;margin-left:4px;">2 – 8 players</span>
     </div>
   </div>
+
+  <!-- Difficulty -->
   <div class="setup-card">
     <h2>Choose difficulty</h2>
     <p style="font-size:13px;opacity:.6;margin-bottom:14px;">Only questions at that level will appear during the game.</p>
-    <div class="diff-row" id="diffRow">
-      <button class="diff-btn active" data-diff="all" onclick="setDiff(this)">
+    <div class="diff-row">
+      <button class="diff-btn active" id="diff-all" onclick="setDiff('all')">
         <span class="diff-icon">🎲</span>
         <span class="diff-name">All</span>
         <span class="diff-desc">Mix of everything</span>
-        <span class="diff-count" id="cnt-all"></span>
+        <span class="diff-count" id="cnt-all">— questions</span>
       </button>
-      <button class="diff-btn" data-diff="E" onclick="setDiff(this)">
+      <button class="diff-btn" id="diff-E" onclick="setDiff('E')">
         <span class="diff-icon">🟢</span>
         <span class="diff-name">Easy</span>
         <span class="diff-desc">Great for new employees</span>
-        <span class="diff-count" id="cnt-E"></span>
+        <span class="diff-count" id="cnt-E">— questions</span>
       </button>
-      <button class="diff-btn" data-diff="M" onclick="setDiff(this)">
+      <button class="diff-btn" id="diff-M" onclick="setDiff('M')">
         <span class="diff-icon">🟡</span>
         <span class="diff-name">Medium</span>
         <span class="diff-desc">Good for most teams</span>
-        <span class="diff-count" id="cnt-M"></span>
+        <span class="diff-count" id="cnt-M">— questions</span>
       </button>
-      <button class="diff-btn" data-diff="H" onclick="setDiff(this)">
+      <button class="diff-btn" id="diff-H" onclick="setDiff('H')">
         <span class="diff-icon">🔴</span>
         <span class="diff-name">Hard</span>
         <span class="diff-desc">Baldrige deep dive</span>
-        <span class="diff-count" id="cnt-H"></span>
+        <span class="diff-count" id="cnt-H">— questions</span>
       </button>
     </div>
   </div>
+
+  <!-- Characters -->
   <div class="setup-card">
     <h2>Choose your characters</h2>
     <p style="font-size:13px;opacity:.6;margin-bottom:14px;">Each player picks one — no duplicates allowed.</p>
     <div class="players-grid" id="playersGrid"></div>
   </div>
+
   <button class="btn-start" id="btnStart" disabled onclick="startGame()">Start Game →</button>
 </div>
 
+<!-- ══ GAME SCREEN ════════════════════════════════════════════════════════════ -->
 <div class="screen" id="sGame">
   <h1 style="color:#fff;font-size:22px;">🏙️ The PHARR Way Path Game</h1>
   <div class="board-wrap" id="boardWrap">
@@ -158,7 +169,7 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
   <div class="q-panel">
     <div class="qlbl">Current Question</div>
     <div class="qmeta">
-      <span class="qnum" id="qNum">Question 1 of 12</span>
+      <span class="qnum" id="qNum">Question 1</span>
       <span class="qcat" id="qCat"></span>
       <span class="qdiff" id="qDiff"></span>
     </div>
@@ -182,296 +193,326 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 </div>
 
 <script>
-// ── QUESTION BANK (Pharr Baldrige 2026) ──────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// QUESTION BANK
+// ═══════════════════════════════════════════════════════════════════════════
 const PHARR_QUESTIONS = [
-  {id:1,cat:"Pharr Way",diff:"E",type:"SA",q:"What are the three pillars of the Pharr Way?",a:"People, Process, and Performance.",src:"Best Practices — The Pharr Way"},
-  {id:2,cat:"Pharr Way",diff:"E",type:"FIB",q:'Pharr\'s mission is: "To provide the _______ level of municipal services every day."',a:"Highest.",src:"Organizational Profile"},
-  {id:3,cat:"Pharr Way",diff:"E",type:"SA",q:"What is Pharr's vision statement?",a:'"To consistently lead the region in municipal excellence, sustainability, and innovation."',src:"Organizational Profile"},
-  {id:4,cat:"Pharr Way",diff:"E",type:"SA",q:"What are Pharr's core values called, and what letter do they spell?",a:"PRIDE values.",src:"Leadership Process — LP 1.1"},
-  {id:5,cat:"Pharr Way",diff:"M",type:"SA",q:"What does ATP stand for, and what does it connect?",a:"Align Team Pharr. ATP connects leadership, strategic planning, budgeting, workforce planning, operations, performance management, and continuous improvement into one integrated framework.",src:"Best Practices — ATP"},
-  {id:6,cat:"Pharr Way",diff:"E",type:"TF",q:"True or False: The Pharr Way is a cultural framework that connects daily work to the City's mission.",a:"True.",src:"Best Practices — The Pharr Way"},
-  {id:7,cat:"Pharr Way",diff:"M",type:"MC",q:"How many active community partnerships has Pharr grown to? A) 17  B) 27  C) 37  D) 47",a:"C) 37.",src:"Leadership Process — LP 6.1"},
-  {id:8,cat:"Pharr Way",diff:"M",type:"SA",q:'What does "Excellence Every Day" mean in practice for a frontline employee?',a:"Every employee, in every interaction, delivers the highest level of service regardless of role.",src:"Organizational Profile / Best Practices"},
-  {id:9,cat:"Pharr Way",diff:"H",type:"SA",q:"What does the Process pillar of the Pharr Way say about how exceptional service gets delivered?",a:"Exceptional service depends on consistent, collaborative, and continuously improved work systems.",src:"Best Practices — The Pharr Way"},
-  {id:10,cat:"Pharr Way",diff:"M",type:"TF",q:"True or False: The Pharr Way was created by leadership and handed down to employees.",a:"False. It was built by the people who use it every day for the residents they serve.",src:"Best Practices — ATP"},
-  {id:11,cat:"Leadership",diff:"E",type:"FIB",q:"The Leadership System deploys the MVV through a ____-step repeatable process.",a:"5-step process: Establish direction, translate MVV into objectives, align resources through ABP, deploy through the employee lifecycle, evaluate and improve.",src:"Leadership Process — LP 1.1"},
-  {id:12,cat:"Leadership",diff:"E",type:"MC",q:"How often do Strategic Alignment Meetings (SAMs) take place? A) Weekly  B) Monthly  C) Bi-monthly  D) Quarterly",a:"C) Bi-monthly.",src:"Leadership Process — LP 2.1"},
-  {id:13,cat:"Leadership",diff:"M",type:"SA",q:"What happened after the 2020 AES showed only 84% of employees understood the MVV?",a:"OSE launched a citywide campaign using visual aids, communication tools, and leadership reinforcement — producing a 16-percentage-point increase in the next AES.",src:"Leadership Process — LP 1.1"},
-  {id:14,cat:"Leadership",diff:"E",type:"TF",q:"True or False: The Board of Commissioners approves Pharr's Mission, Vision, and Values.",a:"True.",src:"Leadership Process — LP 1.1"},
-  {id:15,cat:"Leadership",diff:"M",type:"SA",q:"What percentage of City Management and Senior Leader positions have been filled through internal succession?",a:"70%.",src:"Leadership Process — LP 4.1"},
-  {id:16,cat:"Leadership",diff:"M",type:"FIB",q:"The Pathway to Leadership program has developed _____ employees across _____ cohorts.",a:"228 employees across eight cohorts.",src:"Leadership Process — LP 4.2"},
-  {id:17,cat:"Leadership",diff:"E",type:"SA",q:"What does Trackstar do at the City of Pharr?",a:"Trackstar is the City's employee evaluation platform — strengthening performance management, coaching, and goal alignment across departments.",src:"Leadership Process — LP 3.1"},
-  {id:18,cat:"Leadership",diff:"M",type:"TF",q:"True or False: Pharr established an Office of Professional and Ethical Standards in 2023.",a:"True.",src:"Leadership Process — LP 5.3"},
-  {id:19,cat:"Strategy",diff:"E",type:"SA",q:"How many steps are in Pharr's Strategic Planning Process (SPP)?",a:"7 steps.",src:"Strategy Process — SP 1.1"},
-  {id:20,cat:"Strategy",diff:"E",type:"SA",q:"What are Pharr's six Strategic Objectives?",a:"1) Service Excellence  2) Infrastructure  3) Quality of Life  4) Economic Vitality  5) Sound Governance and Fiscal Sustainability  6) Safe and Secure Community.",src:"Strategy Process — SP 1.1"},
-  {id:21,cat:"Strategy",diff:"M",type:"SA",q:"What new elements were added to the Strategic Planning Process in FY 2024–2025, and why?",a:"SMART and SWOT Days — added after leadership identified a need for greater workforce participation in planning.",src:"Strategy Process — SP 1.1"},
-  {id:22,cat:"Strategy",diff:"E",type:"FIB",q:"Departments submit KPI updates to OSE by the ______ of each month.",a:"15th of each month.",src:"Strategy Process — SP 3.1"},
-  {id:23,cat:"Strategy",diff:"E",type:"SA",q:"What does OSE issue monthly that recognizes achievements and flags improvement areas?",a:"Strengths and Opportunities (S&O) Reports.",src:"Strategy Process — SP 3.1"},
-  {id:24,cat:"Strategy",diff:"H",type:"TF",q:"True or False: Pharr treats innovation as a separate activity outside the Strategic Planning Process.",a:"False. Innovation is embedded into the SPP — not a separate silo.",src:"Strategy Process — SP 4.1"},
-  {id:25,cat:"Strategy",diff:"M",type:"SA",q:"What four criteria does Pharr use to evaluate whether an innovation opportunity should be pursued?",a:"1) Evidence of Impact  2) Strategic Alignment  3) Feasibility  4) Scalability and Sustainability.",src:"OI Process — OIP 3.1"},
-  {id:26,cat:"Customers",diff:"E",type:"MC",q:"How many service types does the Pharr 311 system cover? A) 40  B) 70  C) 100  D) 311",a:"B) 70 service types.",src:"Customer Process — CP 4.1"},
-  {id:27,cat:"Customers",diff:"E",type:"SA",q:"What was Pharr's Bi-Annual Citizen Survey satisfaction rate in FY 2026?",a:"94% — surpassing the USA Top Decile ETC benchmark of 89%.",src:"Customer Results"},
-  {id:28,cat:"Customers",diff:"E",type:"TF",q:"True or False: The City of Pharr treats rising complaint volume as a sign of service failure.",a:"False. Pharr treats it as valuable intelligence to act upon.",src:"Customer Results"},
-  {id:29,cat:"Customers",diff:"M",type:"SA",q:"What six steps make up Pharr's Customer Engagement and Relationship Management Process?",a:"Connect → Understand → Engage → Deliver → Measure → Improve.",src:"Customer Process — CP 2.1"},
-  {id:30,cat:"Customers",diff:"E",type:"FIB",q:"The Pharr 311 Mobile App was launched in _______ and is now a primary platform for service requests.",a:"2019.",src:"Customer Process — CP 1.1"},
-  {id:31,cat:"Customers",diff:"M",type:"MC",q:"In how many languages does Pharr offer translation services? A) 12  B) 25  C) 50  D) More than 78",a:"D) More than 78 languages.",src:"Customer Process — CP 3.1"},
-  {id:32,cat:"Customers",diff:"M",type:"SA",q:"What is Pharr's long-term residency rate, and why does it matter?",a:"58% long-term residency rate — a key indicator of customer loyalty in municipal government.",src:"Customer Process — CP 2.1"},
-  {id:33,cat:"OI & STEP",diff:"E",type:"SA",q:"What does STEP stand for?",a:"Study, Track, Evaluate, Propose.",src:"Best Practices — STEP"},
-  {id:34,cat:"OI & STEP",diff:"E",type:"FIB",q:"STEP is deployed across all _____ City departments.",a:"27 departments.",src:"OI Process — OIP 2.1"},
-  {id:35,cat:"OI & STEP",diff:"M",type:"SA",q:"What improvement methodology did OSE try before STEP, and why was it changed?",a:"PDSA. Employees needed a simpler, more practical methodology — so OSE adapted it into STEP.",src:"OI Process — OIP 2.1"},
-  {id:36,cat:"OI & STEP",diff:"M",type:"MC",q:"How many STEP submissions has Pharr received since inception? A) 47  B) 72  C) 102  D) 228",a:"C) 102 submissions, with 47 adopted citywide.",src:"Best Practices — STEP"},
-  {id:37,cat:"OI & STEP",diff:"M",type:"SA",q:"How much did a Finance STEP reduce P-Card processing time?",a:"From more than 6 business days to 2 days — a 67% reduction.",src:"Best Practices — STEP"},
-  {id:38,cat:"OI & STEP",diff:"E",type:"SA",q:"What four statuses can OSE assign to a STEP submission?",a:"In-Progress, On-Hold, Adopted, or Not Adopted.",src:"OI Process — OIP 3.1"},
-  {id:39,cat:"OI & STEP",diff:"H",type:"SA",q:"What is the annual savings projected from the Bridge Department's paperless leave request STEP?",a:"Approximately $4,898 annually.",src:"Best Practices — STEP"},
-  {id:40,cat:"OI & STEP",diff:"H",type:"SA",q:"What results did Public Utilities achieve through a STEP on vehicle inspections?",a:"83% inspection compliance, 13% increase in vehicles inspected, 15% increase in employee submittal rates.",src:"Best Practices — STEP"},
-  {id:41,cat:"Workforce",diff:"E",type:"SA",q:"What survey does Pharr administer annually to measure employee satisfaction and culture?",a:"The Annual Employee Survey (AES).",src:"Workforce Results — WR 1.1"},
-  {id:42,cat:"Workforce",diff:"E",type:"MC",q:"What was Pharr's overall employee satisfaction rate in FY 2025? A) 87%  B) 91%  C) 95%  D) 99%",a:"C) 95%.",src:"Workforce Results — WR 2.1"},
-  {id:43,cat:"Workforce",diff:"M",type:"TF",q:"True or False: 100% of Pharr employees receive a formal performance review at least annually.",a:"True.",src:"Workforce Results — WR 3.2"},
-  {id:44,cat:"Workforce",diff:"M",type:"SA",q:"What is Pharr's 90-day new hire turnover rate in FY 2025?",a:"0.95% — below the HRBench Top Quartile of 1.73%.",src:"Workforce Results — WR 4.1"},
-  {id:45,cat:"Workforce",diff:"M",type:"FIB",q:"Pharr invests $_____ per FTE in training annually — nearly double the SHRM Top Quartile benchmark of $_____.",a:"$937 per FTE vs. SHRM Top Quartile of $500.",src:"Workforce Results — WR 6.1"},
-  {id:46,cat:"Workforce",diff:"E",type:"SA",q:"How many training days per employee did Pharr record in FY 2025?",a:"8.25 training days per FTE.",src:"Workforce Results — WR 6.2"},
-  {id:47,cat:"Workforce",diff:"H",type:"SA",q:"What are the three stages of Pharr's Workforce Engagement System?",a:"Stage 1: Recruit and Onboard. Stage 2: Engage, Recognize, and Develop. Stage 3: Evaluate and Improve.",src:"Workforce Process — WP 1.1"},
-  {id:48,cat:"Workforce",diff:"M",type:"SA",q:"What is Pharr's employee absenteeism rate compared to the APQC benchmark?",a:"1.0–1.1 days average — far below the APQC benchmark of approximately 6.0 days.",src:"Workforce Results — WR 3.4"},
-  {id:49,cat:"Operations",diff:"E",type:"MC",q:"What platform does Pharr use to qualify and select vendors? A) SharePoint  B) Procureware  C) Trackstar  D) 311",a:"B) Procureware.",src:"Operations Process — OP 4.1"},
-  {id:50,cat:"Operations",diff:"M",type:"TF",q:"True or False: Pharr is subject to mandatory OSHA regulation as a municipality.",a:"False. Pharr voluntarily adheres to OSHA guidelines as a best practice.",src:"Operations Results — OR 5.3"},
-  {id:51,cat:"Operations",diff:"H",type:"SA",q:"What three primary defense vectors does Pharr use to manage cybersecurity?",a:"People, Technology, and Policies and Procedures — organized under the NIST Cybersecurity Framework.",src:"Operations Process — OP 6.1"},
-  {id:52,cat:"Operations",diff:"E",type:"FIB",q:"The five-step Customer Requirements Determination Process identifies, ________, prioritizes, and integrates customer requirements into service delivery.",a:"Analyzes.",src:"Operations Process — OP 1.1"},
-  {id:53,cat:"Results",diff:"E",type:"SA",q:"What is Pharr's Critical Systems Uptime?",a:"99.999% — the Five 9s benchmark — every year from FY 2021 through FY 2025.",src:"Operations Results — OR 1.2"},
-  {id:54,cat:"Results",diff:"M",type:"MC",q:"What share of U.S. fresh produce imports does the Pharr International Bridge command? A) 20%  B) 26%  C) 31%  D) 34%",a:"D) 34% in 2025, processing $6.1 billion in imports.",src:"Strategy Results — SR 1.4"},
-  {id:55,cat:"Results",diff:"E",type:"TF",q:"True or False: Pharr has had zero drinking water violations under TCEQ for five consecutive fiscal years.",a:"True — and is the only municipality among measured peers to achieve this.",src:"Operations Results — OR 2.3"},
-  {id:56,cat:"Results",diff:"M",type:"SA",q:"What percentage of emergency calls does Pharr answer within 15 seconds?",a:"97% in FY 2025 — exceeding the NENA Excellence Target of 90% every year.",src:"Operations Results — OR 2.2"},
-  {id:57,cat:"Results",diff:"M",type:"FIB",q:"PharrConnect's subscriber take rate grew from ____% in FY 2023 to ____% of passed homes by FY 2025.",a:"From 20% to 52% — surpassing the national broadband adoption average of 46.5%.",src:"Strategy Results — SR 1.3"},
-  {id:58,cat:"Results",diff:"H",type:"SA",q:"What is Pharr's phishing prone rate as of FY 2025, and how much has it improved?",a:"5% — down from 24% in FY 2021, a 79% reduction.",src:"Operations Results — OR 4.1"},
-  {id:59,cat:"Results",diff:"M",type:"TF",q:"True or False: Pharr's Self-Sustaining Revenue Ratio improved from 82% in FY 2021 to 94% in FY 2025.",a:"True — the largest gain among peer cities.",src:"Strategy Results — SR 3.4"},
-  {id:60,cat:"Results",diff:"M",type:"SA",q:"By what percentage did Pharr's total auto liability costs decrease from FY 2021 to FY 2025?",a:"More than 77% — from $1,000,726 to $228,443.",src:"Operations Results — OR 5.1"},
+  {id:1,cat:"Pharr Way",diff:"E",q:"What are the three pillars of the Pharr Way?",a:"People, Process, and Performance.",src:"Best Practices — The Pharr Way"},
+  {id:2,cat:"Pharr Way",diff:"E",q:'Pharr\'s mission is: "To provide the _______ level of municipal services every day."',a:"Highest.",src:"Organizational Profile"},
+  {id:3,cat:"Pharr Way",diff:"E",q:"What is Pharr's vision statement?",a:'"To consistently lead the region in municipal excellence, sustainability, and innovation."',src:"Organizational Profile"},
+  {id:4,cat:"Pharr Way",diff:"E",q:"What are Pharr's core values called, and what letter do they spell?",a:"PRIDE values.",src:"Leadership Process — LP 1.1"},
+  {id:5,cat:"Pharr Way",diff:"M",q:"What does ATP stand for, and what does it connect?",a:"Align Team Pharr. ATP connects leadership, strategic planning, budgeting, workforce planning, operations, performance management, and continuous improvement into one integrated framework.",src:"Best Practices — ATP"},
+  {id:6,cat:"Pharr Way",diff:"E",q:"True or False: The Pharr Way is a cultural framework that connects daily work to the City's mission.",a:"True.",src:"Best Practices — The Pharr Way"},
+  {id:7,cat:"Pharr Way",diff:"M",q:"How many active community partnerships has Pharr grown to? A) 17  B) 27  C) 37  D) 47",a:"C) 37.",src:"Leadership Process — LP 6.1"},
+  {id:8,cat:"Pharr Way",diff:"M",q:'What does "Excellence Every Day" mean in practice for a frontline employee?',a:"Every employee, in every interaction, delivers the highest level of service regardless of role.",src:"Organizational Profile"},
+  {id:9,cat:"Pharr Way",diff:"H",q:"What does the Process pillar of the Pharr Way say about how exceptional service gets delivered?",a:"Exceptional service depends on consistent, collaborative, and continuously improved work systems.",src:"Best Practices — The Pharr Way"},
+  {id:10,cat:"Pharr Way",diff:"M",q:"True or False: The Pharr Way was created by leadership and handed down to employees.",a:"False. It was built by the people who use it every day for the residents they serve.",src:"Best Practices — ATP"},
+  {id:11,cat:"Leadership",diff:"E",q:"The Leadership System deploys the MVV through a ____-step repeatable process.",a:"5-step process: Establish direction, translate MVV, align resources through ABP, deploy through the employee lifecycle, evaluate and improve.",src:"Leadership Process — LP 1.1"},
+  {id:12,cat:"Leadership",diff:"E",q:"How often do Strategic Alignment Meetings (SAMs) take place? A) Weekly  B) Monthly  C) Bi-monthly  D) Quarterly",a:"C) Bi-monthly.",src:"Leadership Process — LP 2.1"},
+  {id:13,cat:"Leadership",diff:"M",q:"What happened after the 2020 AES showed only 84% of employees understood the MVV?",a:"OSE launched a citywide campaign using visual aids, communication tools, and leadership reinforcement — producing a 16-percentage-point increase in the next AES.",src:"Leadership Process — LP 1.1"},
+  {id:14,cat:"Leadership",diff:"E",q:"True or False: The Board of Commissioners approves Pharr's Mission, Vision, and Values.",a:"True.",src:"Leadership Process — LP 1.1"},
+  {id:15,cat:"Leadership",diff:"M",q:"What percentage of City Management and Senior Leader positions have been filled through internal succession?",a:"70%.",src:"Leadership Process — LP 4.1"},
+  {id:16,cat:"Leadership",diff:"M",q:"The Pathway to Leadership program has developed _____ employees across _____ cohorts.",a:"228 employees across eight cohorts.",src:"Leadership Process — LP 4.2"},
+  {id:17,cat:"Leadership",diff:"E",q:"What does Trackstar do at the City of Pharr?",a:"Trackstar is the City's employee evaluation platform — strengthening performance management, coaching, and goal alignment.",src:"Leadership Process — LP 3.1"},
+  {id:18,cat:"Leadership",diff:"M",q:"True or False: Pharr established an Office of Professional and Ethical Standards in 2023.",a:"True.",src:"Leadership Process — LP 5.3"},
+  {id:19,cat:"Strategy",diff:"E",q:"How many steps are in Pharr's Strategic Planning Process (SPP)?",a:"7 steps.",src:"Strategy Process — SP 1.1"},
+  {id:20,cat:"Strategy",diff:"E",q:"What are Pharr's six Strategic Objectives?",a:"1) Service Excellence  2) Infrastructure  3) Quality of Life  4) Economic Vitality  5) Sound Governance and Fiscal Sustainability  6) Safe and Secure Community.",src:"Strategy Process — SP 1.1"},
+  {id:21,cat:"Strategy",diff:"M",q:"What new elements were added to the Strategic Planning Process in FY 2024–2025, and why?",a:"SMART and SWOT Days — added after leadership identified a need for greater workforce participation in planning.",src:"Strategy Process — SP 1.1"},
+  {id:22,cat:"Strategy",diff:"E",q:"Departments submit KPI updates to OSE by the ______ of each month.",a:"15th of each month.",src:"Strategy Process — SP 3.1"},
+  {id:23,cat:"Strategy",diff:"E",q:"What does OSE issue monthly that recognizes achievements and flags improvement areas?",a:"Strengths and Opportunities (S&O) Reports.",src:"Strategy Process — SP 3.1"},
+  {id:24,cat:"Strategy",diff:"H",q:"True or False: Pharr treats innovation as a separate activity outside the Strategic Planning Process.",a:"False. Innovation is embedded into the SPP — not a separate silo.",src:"Strategy Process — SP 4.1"},
+  {id:25,cat:"Strategy",diff:"M",q:"What four criteria does Pharr use to evaluate whether an innovation opportunity should be pursued?",a:"1) Evidence of Impact  2) Strategic Alignment  3) Feasibility  4) Scalability and Sustainability.",src:"OI Process — OIP 3.1"},
+  {id:26,cat:"Customers",diff:"E",q:"How many service types does the Pharr 311 system cover? A) 40  B) 70  C) 100  D) 311",a:"B) 70 service types.",src:"Customer Process — CP 4.1"},
+  {id:27,cat:"Customers",diff:"E",q:"What was Pharr's Bi-Annual Citizen Survey satisfaction rate in FY 2026?",a:"94% — surpassing the USA Top Decile ETC benchmark of 89%.",src:"Customer Results"},
+  {id:28,cat:"Customers",diff:"E",q:"True or False: The City of Pharr treats rising complaint volume as a sign of service failure.",a:"False. Pharr treats it as valuable intelligence to act upon.",src:"Customer Results"},
+  {id:29,cat:"Customers",diff:"M",q:"What six steps make up Pharr's Customer Engagement and Relationship Management Process?",a:"Connect → Understand → Engage → Deliver → Measure → Improve.",src:"Customer Process — CP 2.1"},
+  {id:30,cat:"Customers",diff:"E",q:"The Pharr 311 Mobile App was launched in _______ and is now a primary platform for service requests.",a:"2019.",src:"Customer Process — CP 1.1"},
+  {id:31,cat:"Customers",diff:"M",q:"In how many languages does Pharr offer translation services? A) 12  B) 25  C) 50  D) More than 78",a:"D) More than 78 languages.",src:"Customer Process — CP 3.1"},
+  {id:32,cat:"Customers",diff:"M",q:"What is Pharr's long-term residency rate, and why does it matter?",a:"58% long-term residency rate — a key indicator of customer loyalty in municipal government.",src:"Customer Process — CP 2.1"},
+  {id:33,cat:"OI & STEP",diff:"E",q:"What does STEP stand for?",a:"Study, Track, Evaluate, Propose.",src:"Best Practices — STEP"},
+  {id:34,cat:"OI & STEP",diff:"E",q:"STEP is deployed across all _____ City departments.",a:"27 departments.",src:"OI Process — OIP 2.1"},
+  {id:35,cat:"OI & STEP",diff:"M",q:"What improvement methodology did OSE try before STEP, and why was it changed?",a:"PDSA. Employees needed a simpler, more practical methodology — so OSE adapted it into STEP.",src:"OI Process — OIP 2.1"},
+  {id:36,cat:"OI & STEP",diff:"M",q:"How many STEP submissions has Pharr received since inception? A) 47  B) 72  C) 102  D) 228",a:"C) 102 submissions, with 47 adopted citywide.",src:"Best Practices — STEP"},
+  {id:37,cat:"OI & STEP",diff:"M",q:"How much did a Finance STEP reduce P-Card processing time?",a:"From more than 6 business days to 2 days — a 67% reduction.",src:"Best Practices — STEP"},
+  {id:38,cat:"OI & STEP",diff:"E",q:"What four statuses can OSE assign to a STEP submission?",a:"In-Progress, On-Hold, Adopted, or Not Adopted.",src:"OI Process — OIP 3.1"},
+  {id:39,cat:"OI & STEP",diff:"H",q:"What is the annual savings from the Bridge Department's paperless leave request STEP?",a:"Approximately $4,898 annually.",src:"Best Practices — STEP"},
+  {id:40,cat:"OI & STEP",diff:"H",q:"What results did Public Utilities achieve through a STEP on vehicle inspections?",a:"83% inspection compliance, 13% increase in vehicles inspected, 15% increase in employee submittal rates.",src:"Best Practices — STEP"},
+  {id:41,cat:"Workforce",diff:"E",q:"What survey does Pharr administer annually to measure employee satisfaction and culture?",a:"The Annual Employee Survey (AES).",src:"Workforce Results — WR 1.1"},
+  {id:42,cat:"Workforce",diff:"E",q:"What was Pharr's overall employee satisfaction rate in FY 2025? A) 87%  B) 91%  C) 95%  D) 99%",a:"C) 95%.",src:"Workforce Results — WR 2.1"},
+  {id:43,cat:"Workforce",diff:"M",q:"True or False: 100% of Pharr employees receive a formal performance review at least annually.",a:"True.",src:"Workforce Results — WR 3.2"},
+  {id:44,cat:"Workforce",diff:"M",q:"What is Pharr's 90-day new hire turnover rate in FY 2025?",a:"0.95% — below the HRBench Top Quartile of 1.73%.",src:"Workforce Results — WR 4.1"},
+  {id:45,cat:"Workforce",diff:"M",q:"Pharr invests $_____ per FTE in training annually — nearly double the SHRM Top Quartile benchmark of $_____.",a:"$937 per FTE vs. SHRM Top Quartile of $500.",src:"Workforce Results — WR 6.1"},
+  {id:46,cat:"Workforce",diff:"E",q:"How many training days per employee did Pharr record in FY 2025?",a:"8.25 training days per FTE.",src:"Workforce Results — WR 6.2"},
+  {id:47,cat:"Workforce",diff:"H",q:"What are the three stages of Pharr's Workforce Engagement System?",a:"Stage 1: Recruit and Onboard. Stage 2: Engage, Recognize, and Develop. Stage 3: Evaluate and Improve.",src:"Workforce Process — WP 1.1"},
+  {id:48,cat:"Workforce",diff:"M",q:"What is Pharr's employee absenteeism rate compared to the APQC benchmark?",a:"1.0–1.1 days average — far below the APQC benchmark of approximately 6.0 days.",src:"Workforce Results — WR 3.4"},
+  {id:49,cat:"Operations",diff:"E",q:"What platform does Pharr use to qualify and select vendors? A) SharePoint  B) Procureware  C) Trackstar  D) 311",a:"B) Procureware.",src:"Operations Process — OP 4.1"},
+  {id:50,cat:"Operations",diff:"M",q:"True or False: Pharr is subject to mandatory OSHA regulation as a municipality.",a:"False. Pharr voluntarily adheres to OSHA guidelines as a best practice.",src:"Operations Results — OR 5.3"},
+  {id:51,cat:"Operations",diff:"H",q:"What three primary defense vectors does Pharr use to manage cybersecurity?",a:"People, Technology, and Policies and Procedures — organized under the NIST Cybersecurity Framework.",src:"Operations Process — OP 6.1"},
+  {id:52,cat:"Operations",diff:"E",q:"The five-step Customer Requirements Determination Process identifies, ________, prioritizes, and integrates customer requirements into service delivery.",a:"Analyzes.",src:"Operations Process — OP 1.1"},
+  {id:53,cat:"Results",diff:"E",q:"What is Pharr's Critical Systems Uptime?",a:"99.999% — the Five 9s benchmark — every year from FY 2021 through FY 2025.",src:"Operations Results — OR 1.2"},
+  {id:54,cat:"Results",diff:"M",q:"What share of U.S. fresh produce imports does the Pharr International Bridge command? A) 20%  B) 26%  C) 31%  D) 34%",a:"D) 34% in 2025, processing $6.1 billion in imports.",src:"Strategy Results — SR 1.4"},
+  {id:55,cat:"Results",diff:"E",q:"True or False: Pharr has had zero drinking water violations under TCEQ for five consecutive fiscal years.",a:"True — and is the only municipality among measured peers to achieve this.",src:"Operations Results — OR 2.3"},
+  {id:56,cat:"Results",diff:"M",q:"What percentage of emergency calls does Pharr answer within 15 seconds?",a:"97% in FY 2025 — exceeding the NENA Excellence Target of 90% every year.",src:"Operations Results — OR 2.2"},
+  {id:57,cat:"Results",diff:"M",q:"PharrConnect's subscriber take rate grew from ____% in FY 2023 to ____% of passed homes by FY 2025.",a:"From 20% to 52% — surpassing the national broadband adoption average of 46.5%.",src:"Strategy Results — SR 1.3"},
+  {id:58,cat:"Results",diff:"H",q:"What is Pharr's phishing prone rate as of FY 2025, and how much has it improved?",a:"5% — down from 24% in FY 2021, a 79% reduction.",src:"Operations Results — OR 4.1"},
+  {id:59,cat:"Results",diff:"M",q:"True or False: Pharr's Self-Sustaining Revenue Ratio improved from 82% in FY 2021 to 94% in FY 2025.",a:"True — the largest gain among peer cities.",src:"Strategy Results — SR 3.4"},
+  {id:60,cat:"Results",diff:"M",q:"By what percentage did Pharr's total auto liability costs decrease from FY 2021 to FY 2025?",a:"More than 77% — from $1,000,726 to $228,443.",src:"Operations Results — OR 5.1"},
 ];
 
+// ═══════════════════════════════════════════════════════════════════════════
+// DIFFICULTY SELECTION
+// ═══════════════════════════════════════════════════════════════════════════
+var selectedDiff = 'all';
 
-let selectedDiff = 'all';
-// ── RANDOM QUESTION ENGINE ────────────────────────────────────────────────────
-function shuffleArray(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-// Build a fresh shuffled deck each game (all 60 questions, randomised)
-let gameQs = [];
-function buildDeck() {
-  const pool = selectedDiff === 'all'
-    ? PHARR_QUESTIONS
-    : PHARR_QUESTIONS.filter(q => q.diff === selectedDiff);
-  gameQs = shuffleArray(pool);
-}
-
-// ── GAME CONFIG ───────────────────────────────────────────────────────────────
-const BASE = 'https://torres1030.github.io/pharr-way-path-game/';
-
-const CHARS = [
-  {id:'sparky',name:'Sparky',role:'Fire Dept.',       img:BASE+'Sparky%20Dog.png'},
-  {id:'ash',   name:'Ash',   role:'Fire Dept.',       img:BASE+'Sparky%20Recolor.png'},
-  {id:'penny', name:'Penny', role:'Finance',          img:BASE+'Penny%20Pig.png'},
-  {id:'pearl', name:'Pearl', role:'Finance',          img:BASE+'Penny%20Recolor.png'},
-  {id:'cody',  name:'Cody',  role:'Building & Code',  img:BASE+'Cody%20Raccoon.png'},
-  {id:'buddy', name:'Buddy', role:'Building & Code',  img:BASE+'Cody%20Recolor.png'},
-  {id:'ozzy',  name:'Ozzy',  role:'OSE',              img:BASE+'Ozzy%20OSE%20Ocelot.png'},
-  {id:'track', name:'Track', role:'OSE',              img:BASE+'Ozzy%20Recolor.png'},
-];
-
-const WAYPOINTS = [
-  [51,95],[30,83],[16,68],[16,48],[20,28],[36,17],
-  [51,22],[66,13],[83,18],[88,35],[86,54],[83,72],
-];
-const TOTAL = WAYPOINTS.length - 1;
-const OFFSETS = [[-26,-2],[26,-2],[-10,-20],[10,-20],[-28,-18],[28,-18],[0,-30],[0,-8]];
-
-let numP=2, sel={}, positions=[], answered=[], curQ=0, gameOver=false, active=[];
-
-const DIFF_LABEL = {E:'Easy', M:'Medium', H:'Hard'};
-
-// ── SETUP ─────────────────────────────────────────────────────────────────────
-function chgCount(d){
-  numP=Math.min(8,Math.max(2,numP+d));
-  document.getElementById('cntVal').textContent=numP;
-  sel={};
-function setDiff(btn) {
-  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  selectedDiff = btn.dataset.diff;
+function setDiff(diff) {
+  selectedDiff = diff;
+  ['all','E','M','H'].forEach(function(d) {
+    document.getElementById('diff-' + d).classList.toggle('active', d === diff);
+  });
 }
 
 function initDiffCounts() {
-  const total = PHARR_QUESTIONS.length;
-  document.getElementById('cnt-all').textContent = total + ' questions';
-  ['E','M','H'].forEach(d => {
-    const n = PHARR_QUESTIONS.filter(q => q.diff === d).length;
+  document.getElementById('cnt-all').textContent = PHARR_QUESTIONS.length + ' questions';
+  ['E','M','H'].forEach(function(d) {
+    var n = PHARR_QUESTIONS.filter(function(q){ return q.diff === d; }).length;
     document.getElementById('cnt-' + d).textContent = n + ' questions';
   });
 }
 
-buildGrid();
-initDiffCounts();checkStart();
+// ═══════════════════════════════════════════════════════════════════════════
+// DECK BUILDER
+// ═══════════════════════════════════════════════════════════════════════════
+var gameQs = [];
+
+function shuffleArray(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
 }
-function buildGrid(){
-  const g=document.getElementById('playersGrid');g.innerHTML='';
-  for(let p=0;p<numP;p++){
-    const s=document.createElement('div');s.className='player-slot';
-    s.innerHTML=`<h3>Player ${p+1}</h3><div class="char-grid" id="cg${p}"></div>`;
-    g.appendChild(s);buildPicker(p);
+
+function buildDeck() {
+  var pool = selectedDiff === 'all'
+    ? PHARR_QUESTIONS
+    : PHARR_QUESTIONS.filter(function(q){ return q.diff === selectedDiff; });
+  gameQs = shuffleArray(pool);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GAME CONFIG
+// ═══════════════════════════════════════════════════════════════════════════
+var BASE = 'https://torres1030.github.io/pharr-way-path-game/';
+
+var CHARS = [
+  {id:'sparky',name:'Sparky',role:'Fire Dept.',      img:BASE+'Sparky%20Dog.png'},
+  {id:'ash',   name:'Ash',   role:'Fire Dept.',      img:BASE+'Sparky%20Recolor.png'},
+  {id:'penny', name:'Penny', role:'Finance',         img:BASE+'Penny%20Pig.png'},
+  {id:'pearl', name:'Pearl', role:'Finance',         img:BASE+'Penny%20Recolor.png'},
+  {id:'cody',  name:'Cody',  role:'Building & Code', img:BASE+'Cody%20Raccoon.png'},
+  {id:'buddy', name:'Buddy', role:'Building & Code', img:BASE+'Cody%20Recolor.png'},
+  {id:'ozzy',  name:'Ozzy',  role:'OSE',             img:BASE+'Ozzy%20OSE%20Ocelot.png'},
+  {id:'track', name:'Track', role:'OSE',             img:BASE+'Ozzy%20Recolor.png'},
+];
+
+var WAYPOINTS = [
+  [51,95],[30,83],[16,68],[16,48],[20,28],[36,17],
+  [51,22],[66,13],[83,18],[88,35],[86,54],[83,72],
+];
+var TOTAL = WAYPOINTS.length - 1;
+var OFFSETS = [[-26,-2],[26,-2],[-10,-20],[10,-20],[-28,-18],[28,-18],[0,-30],[0,-8]];
+var DIFF_LABEL = {E:'Easy', M:'Medium', H:'Hard'};
+
+var numP=2, sel={}, positions=[], answered=[], curQ=0, gameOver=false, active=[];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SETUP
+// ═══════════════════════════════════════════════════════════════════════════
+function chgCount(d) {
+  numP = Math.min(8, Math.max(2, numP + d));
+  document.getElementById('cntVal').textContent = numP;
+  sel = {}; buildGrid(); checkStart();
+}
+function buildGrid() {
+  var g = document.getElementById('playersGrid'); g.innerHTML = '';
+  for (var p = 0; p < numP; p++) {
+    var s = document.createElement('div'); s.className = 'player-slot';
+    s.innerHTML = '<h3>Player ' + (p+1) + '</h3><div class="char-grid" id="cg' + p + '"></div>';
+    g.appendChild(s); buildPicker(p);
   }
 }
-function buildPicker(p){
-  const cg=document.getElementById('cg'+p);cg.innerHTML='';
-  CHARS.forEach(c=>{
-    const takenBy=Object.entries(sel).find(([k,v])=>v===c.id&&parseInt(k)!==p);
-    const picked=sel[p]===c.id;
-    const d=document.createElement('div');
-    d.className='char-opt'+(picked?' selected':'')+(takenBy?' taken':'');
-    d.innerHTML=`<img src="${c.img}" alt="${c.name}"><div class="cn">${c.name}</div><div class="ck">✓</div>`;
-    d.onclick=()=>pickChar(p,c.id);
+function buildPicker(p) {
+  var cg = document.getElementById('cg' + p); cg.innerHTML = '';
+  CHARS.forEach(function(c) {
+    var takenBy = Object.entries(sel).find(function(e){ return e[1]===c.id && parseInt(e[0])!==p; });
+    var picked = sel[p] === c.id;
+    var d = document.createElement('div');
+    d.className = 'char-opt' + (picked ? ' selected' : '') + (takenBy ? ' taken' : '');
+    d.innerHTML = '<img src="'+c.img+'" alt="'+c.name+'"><div class="cn">'+c.name+'</div><div class="ck">✓</div>';
+    d.onclick = (function(cc){ return function(){ pickChar(p, cc.id); }; })(c);
     cg.appendChild(d);
   });
 }
-function pickChar(p,id){sel[p]===id?delete sel[p]:(sel[p]=id);for(let i=0;i<numP;i++)buildPicker(i);checkStart();}
-function checkStart(){
-  const ok=Object.keys(sel).length===numP&&new Set(Object.values(sel)).size===numP;
-  document.getElementById('btnStart').disabled=!ok;
+function pickChar(p, id) {
+  if (sel[p] === id) { delete sel[p]; } else { sel[p] = id; }
+  for (var i = 0; i < numP; i++) buildPicker(i);
+  checkStart();
+}
+function checkStart() {
+  var ok = Object.keys(sel).length === numP && new Set(Object.values(sel)).size === numP;
+  document.getElementById('btnStart').disabled = !ok;
 }
 
-// ── START ─────────────────────────────────────────────────────────────────────
-function startGame(){
-  active=[];
-  for(let p=0;p<numP;p++) active.push({...CHARS.find(c=>c.id===sel[p]),pNum:p+1});
-  positions=new Array(numP).fill(0);
-  answered=new Array(numP).fill(false);
-  curQ=0;gameOver=false;
-  buildDeck(); // fresh shuffled question deck every game
+// ═══════════════════════════════════════════════════════════════════════════
+// START GAME
+// ═══════════════════════════════════════════════════════════════════════════
+function startGame() {
+  active = [];
+  for (var p = 0; p < numP; p++) {
+    var ch = CHARS.find(function(c){ return c.id === sel[p]; });
+    active.push(Object.assign({}, ch, {pNum: p+1}));
+  }
+  positions = new Array(numP).fill(0);
+  answered  = new Array(numP).fill(false);
+  curQ = 0; gameOver = false;
+  buildDeck();
   document.getElementById('sSetup').classList.remove('active');
   document.getElementById('sGame').classList.add('active');
-  document.getElementById('winBanner').style.display='none';
-  buildTokens();buildCards();renderQ();
+  document.getElementById('winBanner').style.display = 'none';
+  buildTokens(); buildCards(); renderQ();
 }
 
-// ── TOKENS ────────────────────────────────────────────────────────────────────
-function tokenSize(){const bw=document.getElementById('boardWrap').offsetWidth;return Math.max(60,Math.min(100,Math.floor(bw/9)));}
-function buildTokens(){
-  const wrap=document.getElementById('boardWrap');
-  wrap.querySelectorAll('.token').forEach(t=>t.remove());
-  const sz=tokenSize();
-  active.forEach((_,i)=>{
-    const d=document.createElement('div');d.className='token';d.id='tok'+i;
-    d.innerHTML=`<img src="${active[i].img}" style="width:${sz}px;height:${sz}px;" alt="${active[i].name}">`;
+// ═══════════════════════════════════════════════════════════════════════════
+// TOKENS
+// ═══════════════════════════════════════════════════════════════════════════
+function tokenSize() {
+  return Math.max(60, Math.min(100, Math.floor(document.getElementById('boardWrap').offsetWidth / 9)));
+}
+function buildTokens() {
+  var wrap = document.getElementById('boardWrap');
+  wrap.querySelectorAll('.token').forEach(function(t){ t.remove(); });
+  var sz = tokenSize();
+  active.forEach(function(_, i) {
+    var d = document.createElement('div'); d.className = 'token'; d.id = 'tok' + i;
+    d.innerHTML = '<img src="'+active[i].img+'" style="width:'+sz+'px;height:'+sz+'px;" alt="'+active[i].name+'">';
     wrap.appendChild(d);
   });
-  setTimeout(()=>active.forEach((_,i)=>placeToken(i)),120);
-  window.onresize=()=>{
-    const s=tokenSize();
-    active.forEach((_,i)=>{
-      const t=document.getElementById('tok'+i);
-      if(t){t.querySelector('img').style.width=s+'px';t.querySelector('img').style.height=s+'px';}
+  setTimeout(function(){ active.forEach(function(_,i){ placeToken(i); }); }, 120);
+  window.onresize = function() {
+    var s = tokenSize();
+    active.forEach(function(_, i) {
+      var t = document.getElementById('tok' + i);
+      if (t) { t.querySelector('img').style.width = s+'px'; t.querySelector('img').style.height = s+'px'; }
       placeToken(i);
     });
   };
 }
-function placeToken(i){
-  const wrap=document.getElementById('boardWrap');
-  const bw=wrap.offsetWidth;
-  const bh=wrap.querySelector('img').offsetHeight||bw*(1333/2000);
-  const[wx,wy]=WAYPOINTS[positions[i]];
-  const[ox,oy]=OFFSETS[i]||[0,0];
-  const t=document.getElementById('tok'+i);if(!t)return;
-  t.style.left=(bw*wx/100+ox)+'px';
-  t.style.top=(bh*wy/100+oy)+'px';
+function placeToken(i) {
+  var wrap = document.getElementById('boardWrap');
+  var bw = wrap.offsetWidth;
+  var bh = wrap.querySelector('img').offsetHeight || bw*(1333/2000);
+  var wp = WAYPOINTS[positions[i]];
+  var ox = (OFFSETS[i] || [0,0])[0];
+  var oy = (OFFSETS[i] || [0,0])[1];
+  var t = document.getElementById('tok' + i); if (!t) return;
+  t.style.left = (bw * wp[0] / 100 + ox) + 'px';
+  t.style.top  = (bh * wp[1] / 100 + oy) + 'px';
 }
 
-// ── PLAYER CARDS ──────────────────────────────────────────────────────────────
-function buildCards(){
-  const row=document.getElementById('teamsRow');row.innerHTML='';
-  active.forEach((p,i)=>{
-    const c=document.createElement('div');c.className='team-card';c.id='card'+i;
-    c.innerHTML=`
-      <div class="tthumb">
-        <img src="${p.img}" alt="${p.name}">
-        <div><div class="tname">${p.name}</div><div class="tpos" id="pos${i}">Square 0 / ${TOTAL}</div></div>
-      </div>
-      <div class="tbtns">
-        <button class="bc" id="bc${i}" onclick="mark(${i},true)">✓ Correct</button>
-        <button class="bw" id="bw${i}" onclick="mark(${i},false)">✗ Wrong</button>
-      </div>`;
+// ═══════════════════════════════════════════════════════════════════════════
+// PLAYER CARDS
+// ═══════════════════════════════════════════════════════════════════════════
+function buildCards() {
+  var row = document.getElementById('teamsRow'); row.innerHTML = '';
+  active.forEach(function(p, i) {
+    var c = document.createElement('div'); c.className = 'team-card'; c.id = 'card' + i;
+    c.innerHTML =
+      '<div class="tthumb"><img src="'+p.img+'" alt="'+p.name+'">'+
+      '<div><div class="tname">'+p.name+'</div><div class="tpos" id="pos'+i+'">Square 0 / '+TOTAL+'</div></div></div>'+
+      '<div class="tbtns">'+
+      '<button class="bc" id="bc'+i+'" onclick="mark('+i+',true)">✓ Correct</button>'+
+      '<button class="bw" id="bw'+i+'" onclick="mark('+i+',false)">✗ Wrong</button>'+
+      '</div>';
     row.appendChild(c);
   });
 }
-function mark(i,correct){
-  if(answered[i]||gameOver)return;
-  answered[i]=true;
-  const tok=document.getElementById('tok'+i);
-  const card=document.getElementById('card'+i);
-  if(correct&&positions[i]<TOTAL){
+function mark(i, correct) {
+  if (answered[i] || gameOver) return;
+  answered[i] = true;
+  var tok  = document.getElementById('tok'  + i);
+  var card = document.getElementById('card' + i);
+  if (correct && positions[i] < TOTAL) {
     positions[i]++;
-    tok.classList.remove('shake');void tok.offsetWidth;tok.classList.add('bounce');
-    setTimeout(()=>{tok.classList.remove('bounce');placeToken(i);},80);
-    setTimeout(()=>placeToken(i),700);
-  } else if(!correct){
-    tok.classList.add('shake');card.classList.add('wrong-flash');
-    setTimeout(()=>{tok.classList.remove('shake');card.classList.remove('wrong-flash');},500);
+    tok.classList.remove('shake'); void tok.offsetWidth; tok.classList.add('bounce');
+    setTimeout(function(){ tok.classList.remove('bounce'); placeToken(i); }, 80);
+    setTimeout(function(){ placeToken(i); }, 700);
+  } else if (!correct) {
+    tok.classList.add('shake'); card.classList.add('wrong-flash');
+    setTimeout(function(){ tok.classList.remove('shake'); card.classList.remove('wrong-flash'); }, 500);
   }
-  document.getElementById('bc'+i).disabled=true;
-  document.getElementById('bw'+i).disabled=true;
-  const fin=positions[i]>=TOTAL;
-  document.getElementById('pos'+i).textContent=fin?'🏆 Finished!':`Square ${positions[i]} / ${TOTAL}`;
-  if(fin){card.classList.add('finished');if(!gameOver){gameOver=true;setTimeout(()=>showWin([i]),500);}}
+  document.getElementById('bc' + i).disabled = true;
+  document.getElementById('bw' + i).disabled = true;
+  var fin = positions[i] >= TOTAL;
+  document.getElementById('pos' + i).textContent = fin ? '🏆 Finished!' : 'Square ' + positions[i] + ' / ' + TOTAL;
+  if (fin) {
+    card.classList.add('finished');
+    if (!gameOver) { gameOver = true; setTimeout(function(){ showWin([i]); }, 500); }
+  }
 }
-function showWin(ws){
-  const b=document.getElementById('winBanner');
-  document.getElementById('winChars').innerHTML=ws.map(i=>`<img src="${active[i].img}" alt="${active[i].name}">`).join('');
-  document.getElementById('winTxt').textContent=`🎉 ${ws.map(i=>active[i].name).join(' & ')} reached the finish line! Congratulations!`;
-  b.style.display='block';b.scrollIntoView({behavior:'smooth',block:'nearest'});
+function showWin(ws) {
+  var b = document.getElementById('winBanner');
+  document.getElementById('winChars').innerHTML = ws.map(function(i){ return '<img src="'+active[i].img+'" alt="'+active[i].name+'">'; }).join('');
+  document.getElementById('winTxt').textContent = '🎉 ' + ws.map(function(i){ return active[i].name; }).join(' & ') + ' reached the finish line! Congratulations!';
+  b.style.display = 'block'; b.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
-// ── QUESTIONS ─────────────────────────────────────────────────────────────────
-function renderQ(){
-  if(curQ>=gameQs.length){
-    document.getElementById('qTxt').textContent='All questions used! Check the final standings.';
-    document.getElementById('qAns').style.display='none';
-    document.getElementById('qCat').textContent='';
-    document.getElementById('qDiff').textContent='';
-    document.getElementById('qSrc').textContent='';
-    document.getElementById('progF').style.width='100%';
-    if(!gameOver){const mx=Math.max(...positions);showWin(active.map((_,i)=>i).filter(i=>positions[i]===mx));}
+// ═══════════════════════════════════════════════════════════════════════════
+// QUESTIONS
+// ═══════════════════════════════════════════════════════════════════════════
+function renderQ() {
+  if (curQ >= gameQs.length) {
+    document.getElementById('qTxt').textContent = 'All questions used! Check the final standings.';
+    document.getElementById('qAns').style.display = 'none';
+    document.getElementById('qCat').textContent = '';
+    document.getElementById('qDiff').textContent = '';
+    document.getElementById('qSrc').textContent = '';
+    document.getElementById('progF').style.width = '100%';
+    if (!gameOver) {
+      var mx = Math.max.apply(null, positions);
+      showWin(active.map(function(_,i){ return i; }).filter(function(i){ return positions[i] === mx; }));
+    }
     return;
   }
-  const q = gameQs[curQ];
-  document.getElementById('qNum').textContent=`Question ${curQ+1} of ${gameQs.length}`;
-  document.getElementById('qTxt').textContent=q.q;
-  document.getElementById('qAns').textContent=q.a;
-  document.getElementById('qAns').style.display='none';
-  // category + difficulty badges
-  const catEl=document.getElementById('qCat');
-  catEl.textContent=q.cat;
-  const diffEl=document.getElementById('qDiff');
-  diffEl.textContent=DIFF_LABEL[q.diff];
-  diffEl.className='qdiff '+q.diff;
-  document.getElementById('qSrc').textContent='📄 '+q.src;
-  document.getElementById('progF').style.width=(curQ/gameQs.length*100)+'%';
-  answered=active.map((_,i)=>positions[i]>=TOTAL);
-  active.forEach((_,i)=>{
-    const f=positions[i]>=TOTAL;
-    document.getElementById('bc'+i).disabled=f;
-    document.getElementById('bw'+i).disabled=f;
+  var q = gameQs[curQ];
+  document.getElementById('qNum').textContent = 'Question ' + (curQ+1) + ' of ' + gameQs.length;
+  document.getElementById('qTxt').textContent = q.q;
+  document.getElementById('qAns').textContent = q.a;
+  document.getElementById('qAns').style.display = 'none';
+  var catEl  = document.getElementById('qCat');  catEl.textContent  = q.cat;
+  var diffEl = document.getElementById('qDiff'); diffEl.textContent = DIFF_LABEL[q.diff]; diffEl.className = 'qdiff ' + q.diff;
+  document.getElementById('qSrc').textContent = '📄 ' + q.src;
+  document.getElementById('progF').style.width = (curQ / gameQs.length * 100) + '%';
+  answered = active.map(function(_,i){ return positions[i] >= TOTAL; });
+  active.forEach(function(_, i) {
+    var f = positions[i] >= TOTAL;
+    document.getElementById('bc' + i).disabled = f;
+    document.getElementById('bw' + i).disabled = f;
   });
 }
-function revealAns(){document.getElementById('qAns').style.display='block';}
-function nextQ(){if(!gameOver){curQ++;renderQ();}}
-function goSetup(){
+function revealAns() { document.getElementById('qAns').style.display = 'block'; }
+function nextQ()     { if (!gameOver) { curQ++; renderQ(); } }
+function goSetup() {
   document.getElementById('sGame').classList.remove('active');
   document.getElementById('sSetup').classList.add('active');
-  sel={};buildGrid();checkStart();
+  sel = {}; buildGrid(); checkStart();
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════════════
 buildGrid();
+initDiffCounts();
 </script>
 </body>
 </html>
