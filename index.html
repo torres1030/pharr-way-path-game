@@ -79,6 +79,21 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
 .win-banner p{font-size:15px;color:#1B3A6B;font-weight:500;margin-top:6px;}
 .win-chars{display:flex;justify-content:center;gap:8px;margin:12px 0;flex-wrap:wrap;}
 .win-chars img{width:90px;height:90px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));}
+
+.diff-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:600px){.diff-row{grid-template-columns:1fr 1fr;}}
+.diff-btn{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);
+  border-radius:14px;padding:14px 10px;cursor:pointer;color:#fff;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  transition:all .15s;font-family:Arial,sans-serif;}
+.diff-btn:hover{border-color:#FFD700;background:rgba(255,215,0,.08);}
+.diff-btn.active{border-color:#FFD700;background:rgba(255,215,0,.15);
+  box-shadow:0 0 18px rgba(255,215,0,.2);}
+.diff-icon{font-size:26px;line-height:1;}
+.diff-name{font-size:15px;font-weight:bold;letter-spacing:.03em;}
+.diff-desc{font-size:11px;opacity:.55;text-align:center;line-height:1.3;}
+.diff-count{font-size:11px;color:#FFD700;opacity:.8;font-weight:bold;margin-top:2px;}
+.diff-btn.active .diff-count{opacity:1;}
 </style>
 </head>
 <body>
@@ -94,6 +109,36 @@ body{font-family:Arial,sans-serif;background:#1a3a2a;min-height:100vh;display:fl
       <span class="count-val" id="cntVal">2</span>
       <button class="count-btn" onclick="chgCount(1)">+</button>
       <span style="font-size:13px;opacity:.55;margin-left:4px;">2 – 8 players</span>
+    </div>
+  </div>
+  <div class="setup-card">
+    <h2>Choose difficulty</h2>
+    <p style="font-size:13px;opacity:.6;margin-bottom:14px;">Only questions at that level will appear during the game.</p>
+    <div class="diff-row" id="diffRow">
+      <button class="diff-btn active" data-diff="all" onclick="setDiff(this)">
+        <span class="diff-icon">🎲</span>
+        <span class="diff-name">All</span>
+        <span class="diff-desc">Mix of everything</span>
+        <span class="diff-count" id="cnt-all"></span>
+      </button>
+      <button class="diff-btn" data-diff="E" onclick="setDiff(this)">
+        <span class="diff-icon">🟢</span>
+        <span class="diff-name">Easy</span>
+        <span class="diff-desc">Great for new employees</span>
+        <span class="diff-count" id="cnt-E"></span>
+      </button>
+      <button class="diff-btn" data-diff="M" onclick="setDiff(this)">
+        <span class="diff-icon">🟡</span>
+        <span class="diff-name">Medium</span>
+        <span class="diff-desc">Good for most teams</span>
+        <span class="diff-count" id="cnt-M"></span>
+      </button>
+      <button class="diff-btn" data-diff="H" onclick="setDiff(this)">
+        <span class="diff-icon">🔴</span>
+        <span class="diff-name">Hard</span>
+        <span class="diff-desc">Baldrige deep dive</span>
+        <span class="diff-count" id="cnt-H"></span>
+      </button>
     </div>
   </div>
   <div class="setup-card">
@@ -201,6 +246,8 @@ const PHARR_QUESTIONS = [
   {id:60,cat:"Results",diff:"M",type:"SA",q:"By what percentage did Pharr's total auto liability costs decrease from FY 2021 to FY 2025?",a:"More than 77% — from $1,000,726 to $228,443.",src:"Operations Results — OR 5.1"},
 ];
 
+
+let selectedDiff = 'all';
 // ── RANDOM QUESTION ENGINE ────────────────────────────────────────────────────
 function shuffleArray(arr) {
   const a = [...arr];
@@ -214,7 +261,10 @@ function shuffleArray(arr) {
 // Build a fresh shuffled deck each game (all 60 questions, randomised)
 let gameQs = [];
 function buildDeck() {
-  gameQs = shuffleArray(PHARR_QUESTIONS);
+  const pool = selectedDiff === 'all'
+    ? PHARR_QUESTIONS
+    : PHARR_QUESTIONS.filter(q => q.diff === selectedDiff);
+  gameQs = shuffleArray(pool);
 }
 
 // ── GAME CONFIG ───────────────────────────────────────────────────────────────
@@ -246,7 +296,24 @@ const DIFF_LABEL = {E:'Easy', M:'Medium', H:'Hard'};
 function chgCount(d){
   numP=Math.min(8,Math.max(2,numP+d));
   document.getElementById('cntVal').textContent=numP;
-  sel={};buildGrid();checkStart();
+  sel={};
+function setDiff(btn) {
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedDiff = btn.dataset.diff;
+}
+
+function initDiffCounts() {
+  const total = PHARR_QUESTIONS.length;
+  document.getElementById('cnt-all').textContent = total + ' questions';
+  ['E','M','H'].forEach(d => {
+    const n = PHARR_QUESTIONS.filter(q => q.diff === d).length;
+    document.getElementById('cnt-' + d).textContent = n + ' questions';
+  });
+}
+
+buildGrid();
+initDiffCounts();checkStart();
 }
 function buildGrid(){
   const g=document.getElementById('playersGrid');g.innerHTML='';
